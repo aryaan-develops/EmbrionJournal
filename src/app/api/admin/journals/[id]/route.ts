@@ -6,7 +6,7 @@ import Journal from "@/models/Journal";
 
 export async function PATCH(
     req: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: any
 ) {
     try {
         const { id } = await params;
@@ -32,21 +32,6 @@ export async function PATCH(
         }
 
         return NextResponse.json(journal);
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-}
-
-export async function GET(req: NextRequest) {
-    try {
-        const session = await getServerSession(authOptions);
-        if (!session || (session.user as any).role !== "Admin") {
-            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-        }
-
-        await connectDB();
-        const journals = await Journal.find({ status: "Pending" }).sort({ createdAt: -1 });
-        return NextResponse.json(journals);
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
