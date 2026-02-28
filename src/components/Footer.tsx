@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image"; // Added Image import
-import { Mail, MapPin, UserTie, Instagram, Send, ExternalLink } from "lucide-react";
+import { Mail, MapPin, Instagram, Send, ExternalLink } from "lucide-react";
 
 export default function Footer() {
     return (
