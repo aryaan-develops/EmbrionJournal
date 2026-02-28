@@ -9,8 +9,11 @@ import Providers from "@/components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Academic Journal Portal | Research & Publication",
+  title: "Embrion Publication | Research & Engineering Journal",
   description: "A professional platform for academic journal submission and discovery.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
