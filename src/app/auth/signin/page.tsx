@@ -47,23 +47,23 @@ export default function SignIn() {
     <div className="min-h-screen grid lg:grid-cols-2 bg-slate-950 relative overflow-hidden">
       {/* Left Side: Dynamic Branding & Image */}
       <div className="hidden lg:flex relative overflow-hidden border-r border-white/5">
-        <Image 
-          src="/auth/signin-bg.png" 
-          alt="Research Background" 
+        <Image
+          src="/auth/signin-bg.png"
+          alt="Research Background"
           fill
           className="object-cover opacity-60 scale-110"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-950/40 to-transparent" />
-        
+
         <div className="relative z-20 flex flex-col justify-between p-16 w-full h-full text-white">
           <Link href="/" className="flex items-center gap-3">
             <div className="w-12 h-12 bg-white rounded-full p-0.5 shadow-2xl">
-              <Image 
-                src="/logo-image.jpeg" 
-                alt="Logo" 
-                width={48} 
-                height={48} 
+              <Image
+                src="/logo-image.jpeg"
+                alt="Logo"
+                width={48}
+                height={48}
                 className="rounded-full object-cover"
               />
             </div>
@@ -71,7 +71,7 @@ export default function SignIn() {
           </Link>
 
           <div className="space-y-6">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               className="text-6xl font-black tracking-tighter leading-none"
@@ -94,8 +94,8 @@ export default function SignIn() {
       {/* Right Side: Sign In Form */}
       <div className="flex justify-center p-6 pt-40 lg:pt-48 pb-24 relative overflow-hidden bg-slate-950">
         <div className="absolute top-0 -left-20 w-80 h-80 bg-brand-purple/20 rounded-full blur-[120px] lg:hidden" />
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-md relative z-10"
@@ -140,8 +140,8 @@ export default function SignIn() {
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={loading}
                 className="w-full bg-gradient-to-r from-brand-purple via-brand-lavender to-brand-purple bg-[length:200%_auto] animate-gradient-x h-14 rounded-2xl font-black text-xs tracking-[0.2em] uppercase shadow-xl shadow-brand-purple/20 group"
               >
@@ -163,8 +163,8 @@ export default function SignIn() {
             </div>
 
             <div className="grid grid-cols-1 gap-4">
-              <Button 
-                type="button" 
+              <Button
+                type="button"
                 variant="outline"
                 onClick={() => signIn("google")}
                 className="h-14 rounded-2xl border-white/10 bg-white/5 text-white hover:bg-white/10 transition-all font-bold gap-3"

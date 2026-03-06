@@ -13,42 +13,43 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { 
-    ChevronDown, 
-    Target, 
-    Eye, 
-    ShieldCheck, 
-    AlertTriangle, 
-    UserPlus, 
+import {
+    ChevronDown,
+    Target,
+    Eye,
+    ShieldCheck,
+    AlertTriangle,
+    UserPlus,
     ArrowRightCircle,
     Menu,
     X,
     ChevronRight
 } from "lucide-react";
 import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-  SheetTitle,
-  SheetDescription,
+    Sheet,
+    SheetContent,
+    SheetTrigger,
+    SheetClose,
+    SheetTitle,
+    SheetDescription,
 } from "@/components/ui/sheet";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { useState, useEffect } from "react";
 
 import { useSession, signOut } from "next-auth/react";
 
 const navigation = [
     { name: "HOME", href: "/" },
-    { 
-        name: "ABOUT", 
+    {
+        name: "ABOUT",
         href: "/about",
         dropdown: [
-            { name: "Aim & Scope", href: "/about#aim-and-scope", icon: Target },
-            { name: "Peer Review Process", href: "/about#peer-review", icon: Eye },
-            { name: "Publication Ethics", href: "/about#publication-ethics", icon: ShieldCheck },
-            { name: "Plagiarism Policy", href: "/about#publication-ethics", icon: AlertTriangle },
-            { name: "Join as Reviewer", href: "/about#join-as-reviewer", icon: UserPlus },
+            { name: "Aim & Scope", href: "/about/aim-and-scope", icon: Target },
+            { name: "Peer Review Process", href: "/about/peer-review", icon: Eye },
+            { name: "Publication Ethics", href: "/about/publication-ethics", icon: ShieldCheck },
+            { name: "Plagiarism Policy", href: "/about/publication-ethics", icon: AlertTriangle },
+            { name: "Join as Reviewer", href: "/about/join-as-reviewer", icon: UserPlus },
         ]
     },
     { name: "FOR AUTHOR", href: "/submit" },
@@ -64,18 +65,37 @@ export default function Navbar() {
     const isHome = pathname === "/";
     const isAdmin = (session?.user as any)?.role === "Admin";
 
+    const [scrolled, setScrolled] = useState(false);
+    const [visible, setVisible] = useState(true);
+    const { scrollY } = useScroll();
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious() ?? 0;
+        if (latest > previous && latest > 150) {
+            setVisible(false);
+        } else {
+            setVisible(true);
+        }
+        setScrolled(latest > 50);
+    });
+
     return (
-        <motion.div 
+        <motion.div
             initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "circOut" }}
-            className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 md:px-6 text-white font-sans"
+            animate={{
+                y: visible ? 0 : -120,
+                opacity: 1
+            }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4 md:px-6 text-white font-sans pointer-events-none"
         >
             <nav className={cn(
-                "w-full max-w-7xl h-20 md:h-22 backdrop-blur-2xl rounded-[30px] md:rounded-[40px] flex items-center justify-between px-6 md:px-10 transition-all duration-500 overflow-hidden relative group",
-                isHome 
-                    ? "bg-white/5 border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]" 
-                    : "bg-slate-950/90 border border-slate-800 shadow-2xl shadow-indigo-500/10"
+                "w-full max-w-7xl h-16 md:h-18 backdrop-blur-3xl rounded-[24px] md:rounded-[32px] flex items-center justify-between px-6 md:px-10 transition-all duration-500 overflow-hidden relative group pointer-events-auto",
+                scrolled
+                    ? "bg-slate-950/95 border border-white/10 shadow-2xl scale-[0.98] py-2"
+                    : isHome
+                        ? "bg-white/5 border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] py-4"
+                        : "bg-slate-950/90 border border-slate-800 shadow-2xl py-4"
             )}>
                 {/* Shimmer Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
@@ -83,11 +103,11 @@ export default function Navbar() {
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center gap-3 group/logo">
                         <div className="w-10 h-10 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center p-0.5 shadow-xl overflow-hidden transform group-hover/logo:scale-110 group-hover/logo:rotate-3 transition-all duration-500">
-                            <Image 
-                                src="/logo-image.jpeg" 
-                                alt="Embrion Logo" 
-                                width={56} 
-                                height={56} 
+                            <Image
+                                src="/logo-image.jpeg"
+                                alt="Embrion Logo"
+                                width={56}
+                                height={56}
                                 className="object-cover rounded-full"
                             />
                         </div>
@@ -140,16 +160,7 @@ export default function Navbar() {
                                             </Link>
                                         </DropdownMenuItem>
                                     ))}
-                                    <div className="mt-3 pt-3 border-t border-white/5">
-                                        <DropdownMenuItem className="focus:bg-white/5 focus:text-white rounded-2xl transition-all duration-300 py-4 px-4 group/all">
-                                            <Link href={item.href} className="w-full flex items-center justify-between">
-                                                <span className="font-black text-[11px] tracking-widest text-brand-lavender uppercase italic">
-                                                    View All About
-                                                </span>
-                                                <ArrowRightCircle className="w-5 h-5 text-brand-lavender opacity-0 group-hover/all:translate-x-1 group-hover/all:opacity-100 transition-all" />
-                                            </Link>
-                                        </DropdownMenuItem>
-                                    </div>
+
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         ) : (
@@ -175,27 +186,27 @@ export default function Navbar() {
 
                 <div className="flex items-center gap-3 md:gap-6">
                     {session ? (
-                        <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            className="hidden sm:flex text-white font-black text-xs tracking-widest hover:bg-white/5 rounded-full px-6 h-10 transition-all duration-300 uppercase" 
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            className="hidden sm:flex text-white font-black text-xs tracking-widest hover:bg-white/5 rounded-full px-6 h-10 transition-all duration-300 uppercase"
                             onClick={() => signOut()}
                         >
                             Sign Out
                         </Button>
                     ) : (
                         <div className="hidden sm:flex items-center gap-3">
-                            <Button 
-                                variant="ghost" 
-                                size="sm" 
-                                className="text-white font-black text-[10px] tracking-widest hover:bg-white/5 rounded-full px-5 h-10 transition-all duration-300 uppercase" 
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-white font-black text-[10px] tracking-widest hover:bg-white/5 rounded-full px-5 h-10 transition-all duration-300 uppercase"
                                 asChild
                             >
                                 <Link href="/auth/signin">Log In</Link>
                             </Button>
-                            <Button 
-                                size="sm" 
-                                className="bg-gradient-to-r from-brand-purple via-brand-lavender to-brand-purple bg-[length:200%_auto] animate-gradient-x hover:opacity-90 text-white font-black text-[10px] tracking-widest rounded-full px-6 h-10 transition-all duration-300 uppercase shadow-lg shadow-brand-purple/20" 
+                            <Button
+                                size="sm"
+                                className="bg-gradient-to-r from-brand-purple via-brand-lavender to-brand-purple bg-[length:200%_auto] animate-gradient-x hover:opacity-90 text-white font-black text-[10px] tracking-widest rounded-full px-6 h-10 transition-all duration-300 uppercase shadow-lg shadow-brand-purple/20"
                                 asChild
                             >
                                 <Link href="/auth/create-account">Join Now</Link>
@@ -204,12 +215,12 @@ export default function Navbar() {
                     )}
 
                     {isAdmin && (
-                        <Button 
-                            size="sm" 
+                        <Button
+                            size="sm"
                             className={cn(
                                 "rounded-full font-black text-[10px] md:text-xs px-4 md:px-8 h-8 md:h-11 transition-all duration-500 shadow-2xl relative overflow-hidden group/admin",
-                                isHome 
-                                    ? "bg-gradient-to-r from-brand-purple via-brand-lavender to-brand-purple bg-[length:200%_auto] animate-gradient-x hover:opacity-90 text-white shadow-brand-purple/40" 
+                                isHome
+                                    ? "bg-gradient-to-r from-brand-purple via-brand-lavender to-brand-purple bg-[length:200%_auto] animate-gradient-x hover:opacity-90 text-white shadow-brand-purple/40"
                                     : "bg-white text-slate-900 hover:bg-slate-100 shadow-white/10"
                             )}
                             asChild
@@ -242,10 +253,10 @@ export default function Navbar() {
                                             <span className="text-[10px] text-brand-lavender font-black tracking-[0.2em] mt-1">PUBLICATION</span>
                                         </div>
                                     </div>
-                                    
+
                                     <div className="flex flex-col space-y-1 overflow-y-auto pr-2 custom-scrollbar">
                                         {navigation.map((item, i) => (
-                                            <motion.div 
+                                            <motion.div
                                                 key={item.name}
                                                 initial={{ x: 30, opacity: 0 }}
                                                 animate={{ x: 0, opacity: 1 }}
@@ -253,41 +264,41 @@ export default function Navbar() {
                                                 className="flex flex-col"
                                             >
                                                 {item.dropdown ? (
-                                                  <div className="space-y-4 pt-4 pb-2">
-                                                    <div className="text-[9px] font-black text-brand-lavender tracking-[0.3em] uppercase opacity-60 flex items-center gap-2">
-                                                      <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-brand-lavender/30" />
-                                                      {item.name}
-                                                      <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-brand-lavender/30" />
+                                                    <div className="space-y-4 pt-4 pb-2">
+                                                        <div className="text-[9px] font-black text-brand-lavender tracking-[0.3em] uppercase opacity-60 flex items-center gap-2">
+                                                            <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-brand-lavender/30" />
+                                                            {item.name}
+                                                            <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-brand-lavender/30" />
+                                                        </div>
+                                                        <div className="flex flex-col space-y-3 pl-3 border-l border-brand-lavender/20">
+                                                            {item.dropdown.map((subItem) => (
+                                                                <SheetClose asChild key={subItem.name}>
+                                                                    <Link
+                                                                        href={subItem.href}
+                                                                        className="flex items-center gap-3 text-xs font-bold text-white/70 hover:text-white transition-all group"
+                                                                    >
+                                                                        <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-brand-purple transition-colors border border-white/5 group-hover:border-brand-lavender/30">
+                                                                            {subItem.icon && <subItem.icon className="w-3.5 h-3.5 text-brand-lavender group-hover:text-white" />}
+                                                                        </div>
+                                                                        {subItem.name}
+                                                                    </Link>
+                                                                </SheetClose>
+                                                            ))}
+                                                        </div>
                                                     </div>
-                                                    <div className="flex flex-col space-y-3 pl-3 border-l border-brand-lavender/20">
-                                                      {item.dropdown.map((subItem) => (
-                                                        <SheetClose asChild key={subItem.name}>
-                                                          <Link 
-                                                            href={subItem.href}
-                                                            className="flex items-center gap-3 text-xs font-bold text-white/70 hover:text-white transition-all group"
-                                                          >
-                                                            <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-brand-purple transition-colors border border-white/5 group-hover:border-brand-lavender/30">
-                                                                {subItem.icon && <subItem.icon className="w-3.5 h-3.5 text-brand-lavender group-hover:text-white" />}
-                                                            </div>
-                                                            {subItem.name}
-                                                          </Link>
-                                                        </SheetClose>
-                                                      ))}
-                                                    </div>
-                                                  </div>
                                                 ) : (
-                                                  <SheetClose asChild>
-                                                    <Link
-                                                      href={item.href}
-                                                      className={cn(
-                                                          "text-lg font-black tracking-tight transition-all duration-300 py-2.5 flex items-center justify-between group",
-                                                          pathname === item.href ? "text-brand-lavender" : "text-white hover:text-brand-lavender"
-                                                      )}
-                                                    >
-                                                      {item.name}
-                                                      <ChevronRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-lavender" />
-                                                    </Link>
-                                                  </SheetClose>
+                                                    <SheetClose asChild>
+                                                        <Link
+                                                            href={item.href}
+                                                            className={cn(
+                                                                "text-lg font-black tracking-tight transition-all duration-300 py-2.5 flex items-center justify-between group",
+                                                                pathname === item.href ? "text-brand-lavender" : "text-white hover:text-brand-lavender"
+                                                            )}
+                                                        >
+                                                            {item.name}
+                                                            <ChevronRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-brand-lavender" />
+                                                        </Link>
+                                                    </SheetClose>
                                                 )}
                                             </motion.div>
                                         ))}
@@ -296,17 +307,17 @@ export default function Navbar() {
                                     <div className="mt-auto pt-8 flex flex-col gap-3">
                                         {isAdmin && (
                                             <SheetClose asChild>
-                                                <Link 
-                                                    href="/admin" 
+                                                <Link
+                                                    href="/admin"
                                                     className="w-full flex items-center justify-center border border-white/10 rounded-xl h-12 text-[11px] font-black tracking-widest uppercase hover:bg-white/5 transition-all"
                                                 >
                                                     Admin Panel
                                                 </Link>
                                             </SheetClose>
                                         )}
-                                        
+
                                         {session ? (
-                                            <Button 
+                                            <Button
                                                 onClick={() => signOut()}
                                                 className="w-full bg-slate-900 border border-white/10 hover:bg-slate-800 text-white font-black rounded-xl h-12 text-[11px] tracking-widest uppercase transition-all"
                                             >

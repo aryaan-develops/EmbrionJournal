@@ -8,7 +8,7 @@ export default function Footer() {
             {/* Background Glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-blue-600/10 to-transparent pointer-events-none" />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                 {/* Logo & Intro */}
                 <div className="space-y-6">
                     <div className="flex items-center gap-3">
@@ -16,15 +16,15 @@ export default function Footer() {
                         <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-0.5 shadow-lg overflow-hidden">
                             <Image
                                 src="/logo-image.jpeg"
-                                alt="Embrion Logo"
+                                alt="Transactions on Emerging Engineering (TEE) Logo"
                                 width={40} // Adjusted width to match original div size (w-10 = 40px)
                                 height={40} // Adjusted height to match original div size (h-10 = 40px)
                                 className="object-cover rounded-full"
                             />
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xl font-bold tracking-tight">Embrion</span>
-                            <span className="text-[10px] text-indigo-400 font-bold tracking-[0.2em]">PUBLICATION</span>
+                            <span className="text-xl font-bold tracking-tight leading-tight">Transactions on Emerging Engineering</span>
+                            <span className="text-[10px] text-indigo-400 font-bold tracking-[0.2em]">(TEE)</span>
                         </div>
                     </div>
                     <p className="text-gray-400 text-sm leading-relaxed">
@@ -66,20 +66,10 @@ export default function Footer() {
                     </ul>
                 </div>
 
-                {/* Useful Links */}
-                <div className="space-y-6">
-                    <h4 className="text-lg font-bold border-b border-white/10 pb-2 inline-block pr-8">Useful Links</h4>
-                    <ul className="space-y-3">
-                        <li key="Home"><Link href="/" className="text-sm text-gray-400 hover:text-blue-400 transition-all">Home</Link></li>
-                        <li key="Submit"><Link href="/submit" className="text-sm text-gray-400 hover:text-blue-400 transition-all">Submit Paper</Link></li>
-                        <li key="About"><Link href="/about" className="text-sm text-gray-400 hover:text-blue-400 transition-all">About Journal</Link></li>
-                        <li key="Contact"><Link href="/contact-us" className="text-sm text-gray-400 hover:text-blue-400 transition-all">Contact Us</Link></li>
-                    </ul>
-                </div>
 
                 {/* Services */}
                 <div className="space-y-6">
-                    <h4 className="text-lg font-bold border-b border-white/10 pb-2 inline-block pr-8">Our Services</h4>
+                    <h4 className="text-lg font-bold border-b border-white/10 pb-2 inline-block pr-8">Useful Links</h4>
                     <ul className="space-y-3">
                         {["View / Download Paper", "Download Certificate", "FAQs", "Impact Factor", "Google Scholar / Indexing"].map((link) => (
                             <li key={link}>
@@ -94,7 +84,7 @@ export default function Footer() {
             </div>
 
             <div className="mt-20 border-t border-white/5 pt-8 text-center text-xs text-gray-500">
-                <p>© 2026 Embrion Publication. All Rights Reserved.</p>
+                <p>© 2023 Transactions on Emerging Engineering (TEE). All Rights Reserved.</p>
             </div>
         </footer>
     );
