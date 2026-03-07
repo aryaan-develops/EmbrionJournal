@@ -6,10 +6,10 @@ export default function FeedPage() {
             <div className="max-w-6xl mx-auto space-y-8">
                 <header className="text-center space-y-4">
                     <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-                        Academic Journal Portal
+                        Volumes / Issues
                     </h1>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Discover and access peer-reviewed research across multiple disciplines.
+                        Access the complete archive of published volumes and specific research issues.
                     </p>
                 </header>
 

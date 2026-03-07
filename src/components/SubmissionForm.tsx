@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion } from "framer-motion";
@@ -25,8 +26,15 @@ const formSchema = z.object({
 
 export default function SubmissionForm() {
     const { data: session, status } = useSession();
+    const router = useRouter();
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/auth/signin?callbackUrl=/submit");
+        }
+    }, [status, router]);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -79,43 +87,9 @@ export default function SubmissionForm() {
 
     if (!session) {
         return (
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="max-w-2xl mx-auto"
-            >
-                <Card className="border-none shadow-2xl bg-white/90 backdrop-blur-xl py-16 px-6 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 p-8 opacity-5">
-                        <Lock className="w-32 h-32" />
-                    </div>
-                    <CardContent className="text-center space-y-8 relative z-10">
-                        <div className="w-20 h-20 bg-brand-purple/5 text-brand-purple rounded-3xl flex items-center justify-center mx-auto mb-4 border border-brand-purple/10">
-                            <Lock className="w-10 h-10" />
-                        </div>
-                        <div className="space-y-3">
-                            <h3 className="text-3xl font-black text-slate-900">Authentication Required</h3>
-                            <p className="text-slate-600 text-lg font-medium max-w-md mx-auto">
-                                To protect the integrity of the research process, authors are required to be logged in before submitting manuscripts.
-                            </p>
-                        </div>
-                        <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
-                            <Button
-                                asChild
-                                className="bg-brand-purple hover:bg-brand-purple/90 text-white px-8 py-7 rounded-2xl text-lg font-bold transition-all shadow-xl hover:shadow-brand-purple/20 h-auto"
-                            >
-                                <Link href="/auth/signin">Log In to Continue</Link>
-                            </Button>
-                            <Button
-                                variant="outline"
-                                asChild
-                                className="border-slate-200 text-slate-600 px-8 py-7 rounded-2xl text-lg font-bold hover:bg-slate-50 h-auto"
-                            >
-                                <Link href="/auth/create-account">Create Account</Link>
-                            </Button>
-                        </div>
-                    </CardContent>
-                </Card>
-            </motion.div>
+            <div className="w-full flex justify-center py-20">
+                <div className="w-12 h-12 border-4 border-brand-purple border-t-transparent rounded-full animate-spin" />
+            </div>
         );
     }
 

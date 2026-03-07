@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import Providers from "@/components/Providers";
 
 export const metadata: Metadata = {
-  title: "Embrion Publication | Research & Engineering Journal",
+  title: "Transactions on Emerging Engineering (TEE) | Research & Engineering Journal",
   description: "A professional platform for academic journal submission and discovery.",
   icons: {
     icon: "/favicon.ico",

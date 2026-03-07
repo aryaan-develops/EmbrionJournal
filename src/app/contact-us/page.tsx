@@ -44,7 +44,7 @@ export default function ContactPage() {
       {/* Main Content */}
       <section className="max-w-7xl mx-auto px-6 py-20 md:py-32">
         <div className="grid lg:grid-cols-12 gap-16 md:gap-24">
-          
+
           {/* Contact Details */}
           <div className="lg:col-span-5 space-y-16">
             <div className="space-y-12">
@@ -60,7 +60,7 @@ export default function ContactPage() {
                   </div>
                   <div className="space-y-2">
                     <p className="text-xs font-black uppercase tracking-widest text-slate-400">Email Us</p>
-                    <p className="text-xl font-black text-slate-900">groupembrion@gmail.com</p>
+                    <p className="text-xl font-black text-slate-900">grouptee@gmail.com</p>
                     <p className="text-slate-500 font-medium text-sm">Response time: within 24 hours</p>
                   </div>
                 </div>
@@ -83,11 +83,11 @@ export default function ContactPage() {
                   <div className="space-y-2">
                     <p className="text-xs font-black uppercase tracking-widest text-slate-400">Social Presence</p>
                     <div className="flex gap-4">
-                       {["Instagram", "Twitter", "LinkedIn"].map((social) => (
-                          <a key={social} href="#" className="text-lg font-black text-slate-900 hover:text-brand-purple transition-colors underline underline-offset-4 decoration-2 decoration-brand-lavender/50">
-                            {social}
-                          </a>
-                       ))}
+                      {["Instagram", "Twitter", "LinkedIn"].map((social) => (
+                        <a key={social} href="#" className="text-lg font-black text-slate-900 hover:text-brand-purple transition-colors underline underline-offset-4 decoration-2 decoration-brand-lavender/50">
+                          {social}
+                        </a>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -95,20 +95,20 @@ export default function ContactPage() {
             </div>
 
             <div className="p-10 bg-brand-purple rounded-[40px] text-white space-y-6 relative overflow-hidden group">
-               <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:rotate-12 transition-transform duration-700">
-                  <MessageSquare className="w-32 h-32" />
-               </div>
-               <h4 className="text-2xl font-black italic tracking-tight relative z-10">"We are committed to transparent academic communication."</h4>
-               <div className="pt-4 border-t border-white/20 relative z-10">
-                  <p className="font-black">Editor-in-Chief</p>
-                  <p className="text-brand-lavender text-sm font-bold">Transactions on Emerging Engineering</p>
-               </div>
+              <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:rotate-12 transition-transform duration-700">
+                <MessageSquare className="w-32 h-32" />
+              </div>
+              <h4 className="text-2xl font-black italic tracking-tight relative z-10">"We are committed to transparent academic communication."</h4>
+              <div className="pt-4 border-t border-white/20 relative z-10">
+                <p className="font-black">Editor-in-Chief</p>
+                <p className="text-brand-lavender text-sm font-bold uppercase">Transactions on Emerging Engineering (TEE)</p>
+              </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-7">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -119,15 +119,15 @@ export default function ContactPage() {
                   <div className="space-y-4">
                     <Label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Full Name</Label>
                     <div className="relative">
-                       <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-                       <Input placeholder="John Doe" className="h-16 pl-12 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white transition-all font-bold" required />
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
+                      <Input placeholder="John Doe" className="h-16 pl-12 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white transition-all font-bold" required />
                     </div>
                   </div>
                   <div className="space-y-4">
                     <Label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Email Address</Label>
                     <div className="relative">
-                       <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
-                       <Input type="email" placeholder="name@domain.com" className="h-16 pl-12 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white transition-all font-bold" required />
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
+                      <Input type="email" placeholder="name@domain.com" className="h-16 pl-12 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white transition-all font-bold" required />
                     </div>
                   </div>
                 </div>
@@ -139,14 +139,14 @@ export default function ContactPage() {
 
                 <div className="space-y-4">
                   <Label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-1">Your Message</Label>
-                  <Textarea 
-                    placeholder="Tell us how we can help you..." 
-                    className="min-h-[200px] p-6 rounded-[30px] border-slate-100 bg-slate-50 focus:bg-white transition-all font-bold resize-none" 
-                    required 
+                  <Textarea
+                    placeholder="Tell us how we can help you..."
+                    className="min-h-[200px] p-6 rounded-[30px] border-slate-100 bg-slate-50 focus:bg-white transition-all font-bold resize-none"
+                    required
                   />
                 </div>
 
-                <Button 
+                <Button
                   disabled={loading}
                   className="w-full md:w-auto px-12 h-20 bg-brand-purple text-white hover:bg-slate-900 rounded-[28px] font-black text-sm tracking-[0.2em] uppercase transition-all shadow-xl shadow-brand-purple/20 group"
                 >

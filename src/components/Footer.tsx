@@ -13,18 +13,17 @@ export default function Footer() {
                 <div className="space-y-6">
                     <div className="flex items-center gap-3">
                         {/* Replaced MB placeholder with Image component */}
-                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-0.5 shadow-lg overflow-hidden">
+                        <div className="w-10 h-10 bg-transparent rounded-full flex items-center justify-center shadow-lg overflow-hidden">
                             <Image
-                                src="/logo-image.jpeg"
-                                alt="Transactions on Emerging Engineering (TEE) Logo"
+                                src="/logo-tee.jpg"
+                                alt="TEE Logo"
                                 width={40} // Adjusted width to match original div size (w-10 = 40px)
                                 height={40} // Adjusted height to match original div size (h-10 = 40px)
                                 className="object-cover rounded-full"
                             />
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xl font-bold tracking-tight leading-tight">Transactions on Emerging Engineering</span>
-                            <span className="text-[10px] text-indigo-400 font-bold tracking-[0.2em]">(TEE)</span>
+                            <span className="text-2xl font-bold tracking-tighter uppercase">TEE</span>
                         </div>
                     </div>
                     <p className="text-gray-400 text-sm leading-relaxed">
@@ -53,14 +52,14 @@ export default function Footer() {
                         </li>
                         <li className="flex gap-3 text-sm text-gray-400">
                             <Mail className="w-5 h-5 text-blue-500 shrink-0" />
-                            <a href="mailto:groupembrion@gmail.com" className="hover:text-blue-400 transition-all">
-                                Paper Submission: groupembrion@gmail.com
+                            <a href="mailto:grouptee@gmail.com" className="hover:text-blue-400 transition-all">
+                                Paper Submission: grouptee@gmail.com
                             </a>
                         </li>
                         <li className="flex gap-3 text-sm text-gray-400">
                             <Mail className="w-5 h-5 text-blue-500 shrink-0" />
-                            <a href="mailto:groupembrion@gmail.com" className="hover:text-blue-400 transition-all">
-                                Contact Editor: groupembrion@gmail.com
+                            <a href="mailto:grouptee@gmail.com" className="hover:text-blue-400 transition-all">
+                                Contact Editor: grouptee@gmail.com
                             </a>
                         </li>
                     </ul>

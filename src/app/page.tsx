@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  const { data: session } = useSession();
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center bg-white overflow-x-hidden">
 
@@ -51,7 +53,7 @@ export default function Home() {
 
           <div className="mt-16 flex flex-col sm:flex-row items-center gap-8">
             <Button size="lg" asChild className="rounded-full bg-blue-600 hover:bg-blue-500 text-white px-12 h-16 text-base font-bold tracking-widest shadow-2xl shadow-blue-500/40 transition-all duration-500">
-              <Link href="/submit">Submit Paper</Link>
+              <Link href={session ? "/submit" : "/auth/signin?callbackUrl=/submit"}>Submit Paper</Link>
             </Button>
             <Button variant="outline" size="lg" asChild className="rounded-full bg-white/5 hover:bg-white/10 text-white border-white/20 backdrop-blur-2xl px-12 h-16 text-base font-bold tracking-widest shadow-2xl transition-all duration-500">
               <Link href="/feed">Call for Paper</Link>
@@ -65,12 +67,12 @@ export default function Home() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-4xl font-bold text-slate-900 tracking-tight">About Embrion Publication</h2>
+              <h2 className="text-4xl font-bold text-slate-900 tracking-tight uppercase">About Transactions on Emerging Engineering (TEE)</h2>
               <div className="w-20 h-1.5 bg-blue-600 rounded-full" />
             </div>
 
-            <p className="text-lg text-slate-600 leading-relaxed">
-              <strong>Embrion Publication</strong> is an emerging online journal platform
+            <p className="text-lg text-slate-600 leading-relaxed italic">
+              <strong>Transactions on Emerging Engineering (TEE)</strong> is an emerging online journal platform
               dedicated to publishing research work in the field of Engineering.
               The journal provides a supportive academic space for students, researchers,
               and academicians to share innovative ideas, technical knowledge, and practical research outcomes.
@@ -80,7 +82,7 @@ export default function Home() {
               Our publication focuses exclusively on Engineering disciplines including
               Mechanical Engineering, Computer Science Engineering, Electrical Engineering,
               Electronics and Communication Engineering, Civil Engineering, and other related branches.
-              Embrion Publication aims to encourage early-stage researchers and institutions
+              Transactions on Emerging Engineering (TEE) aims to encourage early-stage researchers and institutions
               by offering a simple, transparent, and reliable publishing platform.
             </p>
 

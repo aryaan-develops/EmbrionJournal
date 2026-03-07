@@ -23,7 +23,8 @@ import {
     ArrowRightCircle,
     Menu,
     X,
-    ChevronRight
+    ChevronRight,
+    Search
 } from "lucide-react";
 import {
     Sheet,
@@ -52,7 +53,14 @@ const navigation = [
             { name: "Join as Reviewer", href: "/about/join-as-reviewer", icon: UserPlus },
         ]
     },
-    { name: "FOR AUTHOR", href: "/submit" },
+    {
+        name: "FOR AUTHOR",
+        href: "/submit",
+        dropdown: [
+            { name: "Paper Submission", href: "/submit", icon: ArrowRightCircle },
+            { name: "Indexing", href: "/indexing", icon: Search },
+        ]
+    },
     { name: "ARCHIVE", href: "/feed" },
     { name: "DOWNLOAD", href: "/download" },
     { name: "FAQ", href: "/faq" },
@@ -102,10 +110,10 @@ export default function Navbar() {
 
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center gap-3 group/logo">
-                        <div className="w-10 h-10 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center p-0.5 shadow-xl overflow-hidden transform group-hover/logo:scale-110 group-hover/logo:rotate-3 transition-all duration-500">
+                        <div className="w-10 h-10 md:w-14 md:h-14 bg-transparent rounded-full flex items-center justify-center shadow-2xl overflow-hidden transform group-hover/logo:scale-110 group-hover/logo:rotate-3 transition-all duration-500">
                             <Image
-                                src="/logo-image.jpeg"
-                                alt="Embrion Logo"
+                                src="/logo-tee.jpg"
+                                alt="TEE Logo"
                                 width={56}
                                 height={56}
                                 className="object-cover rounded-full"
@@ -113,15 +121,9 @@ export default function Navbar() {
                         </div>
                         <div className="flex flex-col">
                             <span className={cn(
-                                "text-lg md:text-2xl font-black tracking-tight leading-none bg-clip-text text-transparent bg-gradient-to-r from-brand-lavender via-white to-brand-lavender animate-gradient-x",
+                                "text-2xl md:text-3xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-brand-lavender via-white to-brand-lavender animate-gradient-x uppercase",
                             )}>
-                                Embrion
-                            </span>
-                            <span className={cn(
-                                "text-[8px] md:text-xs font-black tracking-[0.2em] md:tracking-[0.25em] mt-0.5 md:mt-1 transition-all duration-500",
-                                isHome ? "text-brand-lavender/60" : "text-brand-lavender/80"
-                            )}>
-                                PUBLICATION
+                                TEE
                             </span>
                         </div>
                     </Link>
@@ -249,8 +251,7 @@ export default function Navbar() {
                                 <div className="flex flex-col h-full py-8 px-6 relative z-10">
                                     <div className="mb-8 flex items-center justify-between">
                                         <div className="flex flex-col">
-                                            <span className="text-xl font-black text-white tracking-tighter leading-none">Embrion</span>
-                                            <span className="text-[10px] text-brand-lavender font-black tracking-[0.2em] mt-1">PUBLICATION</span>
+                                            <span className="text-2xl font-black text-white tracking-tighter uppercase">TEE</span>
                                         </div>
                                     </div>
 
