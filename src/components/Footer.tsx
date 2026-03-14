@@ -30,13 +30,13 @@ export default function Footer() {
                         Empowering early-stage researchers by offering a simple, transparent, and reliable publishing platform for Engineering disciplines.
                     </p>
                     <div className="flex gap-4">
-                        <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-all">
+                        <a href="#" aria-label="Instagram Page" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-all">
                             <Instagram className="w-5 h-5" />
                         </a>
-                        <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-all">
+                        <a href="#" aria-label="Telegram Channel" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-all">
                             <Send className="w-5 h-5" />
                         </a>
-                        <a href="mailto:groupembrion@gmail.com" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-all">
+                        <a href="mailto:groupembrion@gmail.com" aria-label="Send Email" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-600 transition-all">
                             <Mail className="w-5 h-5" />
                         </a>
                     </div>
@@ -52,13 +52,13 @@ export default function Footer() {
                         </li>
                         <li className="flex gap-3 text-sm text-gray-400">
                             <Mail className="w-5 h-5 text-blue-500 shrink-0" />
-                            <a href="mailto:grouptee@gmail.com" className="hover:text-blue-400 transition-all">
+                            <a href="mailto:grouptee@gmail.com" title="Email Paper Submission" className="hover:text-blue-400 transition-all">
                                 Paper Submission: grouptee@gmail.com
                             </a>
                         </li>
                         <li className="flex gap-3 text-sm text-gray-400">
                             <Mail className="w-5 h-5 text-blue-500 shrink-0" />
-                            <a href="mailto:grouptee@gmail.com" className="hover:text-blue-400 transition-all">
+                            <a href="mailto:grouptee@gmail.com" title="Email Contact Editor" className="hover:text-blue-400 transition-all">
                                 Contact Editor: grouptee@gmail.com
                             </a>
                         </li>
@@ -70,11 +70,16 @@ export default function Footer() {
                 <div className="space-y-6">
                     <h4 className="text-lg font-bold border-b border-white/10 pb-2 inline-block pr-8">Useful Links</h4>
                     <ul className="space-y-3">
-                        {["View / Download Paper", "Download Certificate", "FAQs", "Impact Factor", "Google Scholar / Indexing"].map((link) => (
-                            <li key={link}>
-                                <Link href="#" className="text-sm text-gray-400 hover:text-blue-400 transition-all flex items-center gap-2">
+                        {[
+                            { label: "View / Download Paper", href: "/download", title: "View or Download Research Papers" },
+                            { label: "Download Certificate", href: "/download", title: "Download Publication Certificate" },
+                            { label: "FAQs", href: "/faq", title: "Frequently Asked Questions" },
+                            { label: "Indexing", href: "/indexing", title: "Journal Indexing Information" }
+                        ].map((link) => (
+                            <li key={link.label}>
+                                <Link href={link.href} title={link.title} className="text-sm text-gray-400 hover:text-blue-400 transition-all flex items-center gap-2">
                                     <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                                    {link}
+                                    {link.label}
                                 </Link>
                             </li>
                         ))}
